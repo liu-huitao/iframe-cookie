@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
 </head>
 <body>
     <div>你好1</div>
@@ -12,5 +14,33 @@
     	width="100%"
     	height="600px"
     ></iframe>
+    <script>
+        window.addEventListener('load', function() {
+            window.cookieconsent.initialise({
+                palette: {
+                    popup: { background: "#000" },
+                    button: { background: "#f1d600" }
+                },
+                theme: "edgeless",
+                content: {
+                    message: "我们使用cookie以确保您在我们的网站上获得最佳体验。",
+                    dismiss: "同意",
+                    link: "了解更多",
+                    href: "https://www.yourwebsite.com/privacy-policy"
+                }
+            });
+        });
+        window.cookieconsent.initialise({
+            // ...其他配置
+            onInitialise: function (status) {
+                var type = this.options.type;
+                var didConsent = this.hasConsented();
+                if (didConsent) {
+                    // 用户同意后执行的操作
+                    loadGoogleAnalytics();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
